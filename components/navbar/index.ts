@@ -16,17 +16,14 @@ import 'carbon-web-components/es/components/dropdown/dropdown-item.js';
 
 import { closeIcon } from '../icons/close.js';
 import { menuIcon } from '../icons/menu.js';
-import { qiskitLogoIcon } from '../icons/qiskit-logo.js';
-import { userIcon } from '../icons/user.js';
 import styles from './index.scss';
 import {
-  NavLink,
-  DropdownNavItem,
   homeLink,
-  userLink,
-  navItems,
+  userAccountLink,
+  mainNavLinks,
   socialMediaLinks,
 } from './links.js';
+import type { NavLink, DropdownNavItem } from './links.js';
 
 @customElement('qiskit-navbar')
 export class QiskitNavbar extends LitElement {
@@ -42,7 +39,7 @@ export class QiskitNavbar extends LitElement {
     return html`
       <nav class="navbar">
         <a href="${homeLink.url}">
-          <div class="navbar__logo">${qiskitLogoIcon}</div>
+          <div class="navbar__logo">${homeLink.icon}</div>
         </a>
 
         <button class="navbar__toggler" @click="${this._toggleCollapsedMenu}">
@@ -53,7 +50,7 @@ export class QiskitNavbar extends LitElement {
 
         <div class="navbar__menu ${this.showCollapsedMenu ? 'show' : null}">
           <ul class="navbar__nav">
-            ${navItems.map(
+            ${mainNavLinks.map(
               (navItem) => html`
                 <li class="navbar__nav-item">
                   ${'subItems' in navItem
@@ -63,8 +60,11 @@ export class QiskitNavbar extends LitElement {
               `
             )}
             <li class="navbar__menu__account">
-              <a href="${userLink.url}" class="navbar__menu__account__link">
-                ${userIcon}
+              <a
+                href="${userAccountLink.url}"
+                class="navbar__menu__account__link"
+              >
+                ${userAccountLink.icon}
               </a>
             </li>
           </ul>

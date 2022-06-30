@@ -8,42 +8,33 @@
 import type { TemplateResult } from 'lit';
 
 import { mediumIcon } from '../icons/medium.js';
+import { qiskitLogoIcon } from '../icons/qiskit-logo.js';
 import { slackIcon } from '../icons/slack.js';
 import { twitterIcon } from '../icons/twitter.js';
+import { userIcon } from '../icons/user.js';
 import { youtubeIcon } from '../icons/youtube.js';
 
 // TODO: Define how to pass Segment data to the consumer.
-interface SegmentData {
+type SegmentData = {
   cta: string;
   location: string;
-}
+};
 
-export interface DropdownNavItem {
+export type NavLink = {
+  icon?: TemplateResult;
+  label: string;
+  url: string;
+  segment?: SegmentData;
+};
+
+export type DropdownNavItem = {
   label: string;
   subItems: NavLink[];
-}
+};
 
-interface HomeLink {
-  url: string;
-  segment: SegmentData;
-}
-
-export interface NavLink {
-  label: string;
-  url: string;
-  segment: SegmentData;
-}
-
-interface SocialMediaLink {
-  icon: TemplateResult;
-  label: string;
-  url: string;
-}
-
-/**
- * Link to the home page.
- */
-export const homeLink: HomeLink = {
+export const homeLink: NavLink = {
+  icon: qiskitLogoIcon,
+  label: 'Home',
   url: '/',
   segment: {
     cta: 'home',
@@ -51,10 +42,9 @@ export const homeLink: HomeLink = {
   },
 };
 
-/**
- * Link to the user account page.
- */
-export const userLink: HomeLink = {
+export const userAccountLink: NavLink = {
+  icon: userIcon,
+  label: 'User account',
   url: '/account',
   segment: {
     cta: 'account',
@@ -62,10 +52,7 @@ export const userLink: HomeLink = {
   },
 };
 
-/**
- * Main navigation links.
- */
-export const navItems: Array<NavLink | DropdownNavItem> = [
+export const mainNavLinks: Array<NavLink | DropdownNavItem> = [
   {
     label: 'Overview',
     url: '/overview',
@@ -121,10 +108,7 @@ export const navItems: Array<NavLink | DropdownNavItem> = [
   },
 ];
 
-/**
- * Social media links.
- */
-export const socialMediaLinks: SocialMediaLink[] = [
+export const socialMediaLinks: NavLink[] = [
   {
     icon: twitterIcon,
     label: 'Twitter',
